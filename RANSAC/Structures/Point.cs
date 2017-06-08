@@ -34,5 +34,14 @@ namespace RANSAC.Structures
 
             return Math.Sqrt(distance);
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+
+            Point p = (Point)obj;
+            return (X == p.X) && (Y == p.Y) && Features.SequenceEqual(p.Features);
+        }
     }
 }
