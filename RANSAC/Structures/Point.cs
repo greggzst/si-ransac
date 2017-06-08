@@ -10,11 +10,13 @@ namespace RANSAC.Structures
     {
         public float X { get; set; }
         public float Y { get; set; }
+        public float[] Features { get; set; }
 
-        public Point(float x, float y)
+        public Point(float x, float y, float[] features)
         {
             X = x;
             Y = y;
+            Features = features;
         }
     }
 }
