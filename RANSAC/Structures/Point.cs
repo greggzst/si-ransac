@@ -23,5 +23,16 @@ namespace RANSAC.Structures
         {
             return Math.Sqrt(Math.Pow(X - p.X,2) + Math.Pow(Y - p.Y,2));
         }
+
+        public double featuresDistance(Point p)
+        {
+            double distance = 0;
+            for(int i = 0; i < Features.Length; i++)
+            {
+                distance += Math.Pow(Features[i] - p.Features[i], 2);
+            }
+
+            return Math.Sqrt(distance);
+        }
     }
 }
