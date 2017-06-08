@@ -96,6 +96,30 @@ namespace RANSAC
             return p.Equals(givenPoint);
         }
 
+        private List<Structures.Point> getPointNeighbourHood(Structures.Point point, List<Structures.Point> points, int k)
+        {
+            List<Structures.Point> copy = points.ToList();
+            copy.Remove(point);
+
+            List<Tuple<int, double>> indexDistance = new List<Tuple<int, double>>();
+            for(int i = 0; i < copy.Count; i++)
+            {
+                var p = copy.ElementAt(i);
+                indexDistance.Add(new Tuple<int, double>(i, point.distance(p)));
+            }
+            indexDistance.Sort((x, y) => x.Item2.CompareTo(y.Item2));
+
+            List<Structures.Point> neighbours = new List<Structures.Point>();
+
+            for(int i = 0; i < k; i++)
+            {
+                var p = copy.ElementAt(indexDistance.ElementAt(i).Item1);
+                neighbours.Add(p);
+            }
+
+            return neighbours;
+        }
+
 
     }
 }
