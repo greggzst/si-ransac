@@ -49,57 +49,53 @@ namespace RANSAC
             return keyPointList;
         }
 
-        private List<Tuple<Structures.Point, Structures.Point>> getKeyPointPairs(List<Structures.Point> firstKeyPoints, List<Structures.Point> secondKeyPoints)
+        private List<Tuple<Structures.Point, Structures.Point>> getMutualPointsPairs(List<Structures.Point> firstKeyPoints, List<Structures.Point> secondKeyPoints)
         {
-            List<Tuple<Structures.Point, Structures.Point>> firstPicturePairs = getPointsPair(firstKeyPoints, secondKeyPoints);
-            List<Tuple<Structures.Point, Structures.Point>> secondPicturePairs = getPointsPair(secondKeyPoints, firstKeyPoints);
-
-            List<Tuple<Structures.Point, Structures.Point>> keyPoints = new List<Tuple<Structures.Point, Structures.Point>>();
-
-            foreach (var firstPoint in firstPicturePairs)
-            {
-                foreach (var secondPoint in secondPicturePairs)
-                {
-                    if(isMutual(firstPoint,secondPoint))
-                    {
-                        keyPoints.Add(firstPoint);
-                    }
-                }
-            }
-
-            return keyPoints;
-
-        }
-
-        private bool isMutual(Tuple<Structures.Point,Structures.Point> firstPair, Tuple<Structures.Point,Structures.Point> secondPair)
-        {
-            return firstPair.Item1.Features.SequenceEqual(secondPair.Item2.Features) && firstPair.Item2.Features.SequenceEqual(secondPair.Item1.Features);
-        }
-
-        private List<Tuple<Structures.Point, Structures.Point>> getPointsPair(List<Structures.Point> firstKeyPoints, List<Structures.Point> secondKeyPoints)
-        {
-            List<Tuple<Structures.Point, Structures.Point>> picturePointsPairs = new List<Tuple<Structures.Point, Structures.Point>>();
+            List<Tuple<Structures.Point, Structures.Point>> mutualPoints = new List<Tuple<Structures.Point, Structures.Point>>();
 
             foreach (var point in firstKeyPoints)
             {
                 double distance = double.MaxValue;
-                int index = 0;
+                Structures.Point secondPoint = null;
 
                 for (int i = 0; i < secondKeyPoints.Count; i++)
                 {
                     var p = secondKeyPoints.ElementAt(i);
-                    double dist = point.distance(p);
+                    double dist = point.featuresDistance(secondPoint);
                     if (dist < distance)
                     {
                         distance = dist;
-                        index = i;
+                        secondPoint = p;
+                       
                     }
                 }
 
-                picturePointsPairs.Add(new Tuple<Structures.Point, Structures.Point>(point, secondKeyPoints.ElementAt(index)));
+                if(isMutual(secondPoint,point,firstKeyPoints))
+                {
+                    mutualPoints.Add(new Tuple<Structures.Point, Structures.Point>(point, secondPoint));
+                }
             }
 
-            return picturePointsPairs;
+            return mutualPoints;
         }
+
+        private bool isMutual(Structures.Point foundPoint, Structures.Point givenPoint, List<Structures.Point> points)
+        {
+            double distance = double.MaxValue;
+            Structures.Point p = null;
+            foreach (var point in points)
+            {
+                double dist = foundPoint.featuresDistance(point);
+                if(dist < distance)
+                {
+                    distance = dist;
+                    p = point;
+                }
+            }
+
+            return p.Equals(givenPoint);
+        }
+
+
     }
 }
