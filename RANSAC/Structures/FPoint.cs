@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace RANSAC.Structures
 {
-    class Point
+    class FPoint
     {
         public float X { get; set; }
         public float Y { get; set; }
         public float[] Features { get; set; }
 
-        public Point(float x, float y, float[] features)
+        public FPoint(float x, float y, float[] features)
         {
             X = x;
             Y = y;
             Features = features;
         }
 
-        public double distance(Point p)
+        public double distance(FPoint p)
         {
             return Math.Sqrt(Math.Pow(X - p.X,2) + Math.Pow(Y - p.Y,2));
         }
 
-        public double featuresDistance(Point p)
+        public double featuresDistance(FPoint p)
         {
             double distance = 0;
             for(int i = 0; i < Features.Length; i++)
@@ -40,7 +40,7 @@ namespace RANSAC.Structures
             if (obj == null || GetType() != obj.GetType())
                 return false;
 
-            Point p = (Point)obj;
+            FPoint p = (FPoint)obj;
             return (X == p.X) && (Y == p.Y) && Features.SequenceEqual(p.Features);
         }
     }
