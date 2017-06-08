@@ -40,13 +40,66 @@ namespace RANSAC
         private List<Structures.Point> getKeyPoints(ImageFeature<float>[] features)
         {
             List<Structures.Point> keyPointList = new List<Structures.Point>();
-            foreach(var feature in features)
+            foreach (var feature in features)
             {
                 var pointCoordinatesAndFeatures = feature.Descriptor;
                 var pointFeatures = pointCoordinatesAndFeatures.Skip(5).ToArray();
                 keyPointList.Add(new Structures.Point(pointCoordinatesAndFeatures[0], pointCoordinatesAndFeatures[1], pointFeatures));
             }
             return keyPointList;
+        }
+
+        private List<Tuple<Structures.Point, Structures.Point>> getKeyPointPairs(List<Structures.Point> firstKeyPoints, List<Structures.Point> secondKeyPoints)
+        {
+            List<Tuple<Structures.Point, Structures.Point>> firstPicturePairs = getPointsPair(firstKeyPoints, secondKeyPoints);
+            List<Tuple<Structures.Point, Structures.Point>> secondPicturePairs = getPointsPair(secondKeyPoints, firstKeyPoints);
+
+            List<Tuple<Structures.Point, Structures.Point>> keyPoints = new List<Tuple<Structures.Point, Structures.Point>>();
+
+            foreach (var firstPoint in firstPicturePairs)
+            {
+                foreach (var secondPoint in secondPicturePairs)
+                {
+                    if(isMutual(firstPoint,secondPoint))
+                    {
+                        keyPoints.Add(firstPoint);
+                    }
+                }
+            }
+
+            return keyPoints;
+
+        }
+
+        private bool isMutual(Tuple<Structures.Point,Structures.Point> firstPair, Tuple<Structures.Point,Structures.Point> secondPair)
+        {
+            return firstPair.Item1.Features.SequenceEqual(secondPair.Item2.Features) && firstPair.Item2.Features.SequenceEqual(secondPair.Item1.Features);
+        }
+
+        private List<Tuple<Structures.Point, Structures.Point>> getPointsPair(List<Structures.Point> firstKeyPoints, List<Structures.Point> secondKeyPoints)
+        {
+            List<Tuple<Structures.Point, Structures.Point>> picturePointsPairs = new List<Tuple<Structures.Point, Structures.Point>>();
+
+            foreach (var point in firstKeyPoints)
+            {
+                double distance = double.MaxValue;
+                int index = 0;
+
+                for (int i = 0; i < secondKeyPoints.Count; i++)
+                {
+                    var p = secondKeyPoints.ElementAt(i);
+                    double dist = point.distance(p);
+                    if (dist < distance)
+                    {
+                        distance = dist;
+                        index = i;
+                    }
+                }
+
+                picturePointsPairs.Add(new Tuple<Structures.Point, Structures.Point>(point, secondKeyPoints.ElementAt(index)));
+            }
+
+            return picturePointsPairs;
         }
     }
 }
