@@ -40,7 +40,7 @@ namespace RANSAC
 
         private List<FPoint> getKeyPoints(ImageFeature<float>[] features)
         {
-            List<FPoint> keyPointList = new List<Structures.FPoint>();
+            List<FPoint> keyPointList = new List<FPoint>();
             foreach (var feature in features)
             {
                 var pointCoordinatesAndFeatures = feature.Descriptor;
@@ -95,6 +95,30 @@ namespace RANSAC
             }
 
             return p.Equals(givenPoint);
+        }
+
+        private List<Tuple<FPoint,FPoint>> neighbourFilter(List<Tuple<FPoint,FPoint>> keyPointsPairs, int neighbours, double threshold)
+        {
+            List<Tuple<FPoint, FPoint>> points = new List<Tuple<FPoint, FPoint>>();
+
+            foreach (var pair in keyPointsPairs)
+            {
+                var firstPoint = pair.Item1;
+                var secondPoint = pair.Item2;
+
+                var closestToFirstPoint = keyPointsPairs.OrderBy(x => Math.Sqrt(Math.Pow(x.Item1.X - firstPoint.X, 2) + Math.Pow(x.Item1.Y - firstPoint.Y, 2))).Take(neighbours);
+                var closestToSecondPoint = keyPointsPairs.OrderBy(x => Math.Sqrt(Math.Pow(x.Item2.X - secondPoint.X, 2) + Math.Pow(x.Item2.Y - secondPoint.Y, 2))).Take(neighbours);
+
+                int pointsInNeighbourHood = closestToFirstPoint.Count(x => closestToSecondPoint.Contains(x));
+                double neighbourhoodQuality = (double)pointsInNeighbourHood / (double)neighbours;
+
+                if (neighbourhoodQuality >= threshold)
+                {
+                    points.Add(pair);
+                }
+            }
+
+            return points;
         }
 
 
