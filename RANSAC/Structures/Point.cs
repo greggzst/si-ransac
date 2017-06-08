@@ -18,5 +18,10 @@ namespace RANSAC.Structures
             Y = y;
             Features = features;
         }
+
+        public double distance(Point p)
+        {
+            return Math.Sqrt(Math.Pow(X - p.X,2) + Math.Pow(Y - p.Y,2));
+        }
     }
 }
