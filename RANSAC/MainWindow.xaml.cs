@@ -36,5 +36,17 @@ namespace RANSAC
             var detector = new SIFTDetector();
             return detector.DetectFeatures(image, null);
         }
+
+        private List<Structures.Point> getKeyPoints(ImageFeature<float>[] features)
+        {
+            List<Structures.Point> keyPointList = new List<Structures.Point>();
+            foreach(var feature in features)
+            {
+                var pointCoordinatesAndFeatures = feature.Descriptor;
+                var pointFeatures = pointCoordinatesAndFeatures.Skip(5).ToArray();
+                keyPointList.Add(new Structures.Point(pointCoordinatesAndFeatures[0], pointCoordinatesAndFeatures[1], pointFeatures));
+            }
+            return keyPointList;
+        }
     }
 }
