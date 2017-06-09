@@ -28,9 +28,13 @@ namespace RANSAC
     public partial class MainWindow : Window
     {
         private BitmapImage firstImage;
+        private Bitmap firstBitmap;
+        private Bitmap firstOriginal;
         private ImageFeature<float>[] features1;
 
         private BitmapImage secondImage;
+        private Bitmap secondBitmap;
+        private Bitmap secondOriginal;
         private ImageFeature<float>[] features2;
 
         public MainWindow()
@@ -38,17 +42,24 @@ namespace RANSAC
             InitializeComponent();
         }
 
+        public static ImageFeature<float>[] getImageFeatures(Bitmap bitmap)
+        {
+            Image<Gray, Byte> image = new Image<Gray, Byte>(bitmap);
+            var detector = new SIFTDetector();
+            return detector.DetectFeatures(image, null);
+        }
+
         private void load1_click(object sender, RoutedEventArgs e)
         {
-            image1.Source = loadImage(firstImage);
+            image1.Source = loadImage(firstImage,firstBitmap,firstOriginal);
         }
 
         private void load2_click(object sender, RoutedEventArgs e)
         {
-            image2.Source = loadImage(secondImage);
+            image2.Source = loadImage(secondImage,secondBitmap,secondOriginal);
         }
 
-        private ImageSource loadImage(BitmapImage image)
+        private ImageSource loadImage(BitmapImage image, Bitmap bitmap, Bitmap bitmapOriginal)
         {
             OpenFileDialog op = new OpenFileDialog
             {
@@ -59,6 +70,8 @@ namespace RANSAC
             if (op.ShowDialog() == true)
             {
                image = new BitmapImage(new Uri(op.FileName));
+               bitmap = new Bitmap(op.FileName);
+               bitmapOriginal = new Bitmap(op.FileName);
                return image;
             }
 

@@ -14,14 +14,7 @@ namespace RANSAC.Utilities
 {
     class BasePointUtilities
     {
-        public static ImageFeature<float>[] getImageFeatures(Bitmap bitmap)
-        {
-            Image<Gray, Byte> image = new Image<Gray, Byte>(bitmap);
-            var detector = new SIFTDetector();
-            return detector.DetectFeatures(image, null);
-        }
-
-        private List<FPoint> getKeyPoints(ImageFeature<float>[] features)
+        public static List<FPoint> getKeyPoints(ImageFeature<float>[] features)
         {
             List<FPoint> keyPointList = new List<FPoint>();
             foreach (var feature in features)
