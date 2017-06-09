@@ -118,6 +118,15 @@ namespace RANSAC
             Bitmap result = Utilities.Drawing.generateNewImage(firstOriginal, secondOriginal, keyPointsPairs, System.Drawing.Color.Brown);
 
             resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
+            neighbour.IsEnabled = true;
+        }
+
+        private void neighbourhood_click(object sender, RoutedEventArgs e)
+        {
+            var keyPointsPairs = BasePointUtilities.getKeyPointsPairs(features1, features2);
+            var reducedKeyPointsPairs = BasePointUtilities.neighbourFilter(keyPointsPairs, 10, 0.6);
+            Bitmap result = Utilities.Drawing.generateNewImage(firstOriginal, secondOriginal, reducedKeyPointsPairs, System.Drawing.Color.Aqua);
+            resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
         }
     }
 }
