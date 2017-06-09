@@ -107,9 +107,16 @@ namespace RANSAC
                 drawFeaturesOnBitmap(features2, secondBitmap);
             }
 
-            Bitmap result = Utilities.Drawing.mergeImages(firstBitmap, secondBitmap);
-            resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
-            keyPoints.IsEnabled = true;
+            if(firstImage != null && secondImage != null)
+            {
+                Bitmap result = Utilities.Drawing.mergeImages(firstBitmap, secondBitmap);
+                resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
+                keyPoints.IsEnabled = true;
+            }
+            else
+            {
+                showMessage("Both images must be loaded first!");
+            }
         }
 
         private void keyPoints_click(object sender, RoutedEventArgs e)
@@ -127,6 +134,11 @@ namespace RANSAC
             var reducedKeyPointsPairs = BasePointUtilities.neighbourFilter(keyPointsPairs, 10, 0.6);
             Bitmap result = Utilities.Drawing.generateNewImage(firstOriginal, secondOriginal, reducedKeyPointsPairs, System.Drawing.Color.Aqua);
             resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
+        }
+
+        private void showMessage(string message)
+        {
+            MessageBox.Show(message);
         }
     }
 }
