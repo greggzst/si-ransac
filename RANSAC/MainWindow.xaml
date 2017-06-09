@@ -28,6 +28,7 @@
         <Button x:Name="neighbour" Content="Neighbourhood" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="10,100,9.6,0" VerticalAlignment="Top" Width="94" IsEnabled="False" Click="neighbourhood_click"/>
         <Button x:Name="affine" Content="Affine" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="10,124,9.6,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="affine_click"/>
         <Button x:Name="perspective" Content="Perspective" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="20,148,19.6,0" VerticalAlignment="Top" Width="74" IsEnabled="False" Click="perspective_click"/>
+        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="48,54.6,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
