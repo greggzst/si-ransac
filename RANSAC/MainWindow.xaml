@@ -18,14 +18,14 @@
         </Grid.RowDefinitions>
         <Image x:Name="image1" HorizontalAlignment="Left" Height="301" Margin="10,24,0,0" VerticalAlignment="Top" Width="218" Grid.Row="0" Grid.Column="0"/>
         <Image x:Name="image2" HorizontalAlignment="Left" Height="301" Margin="10,24,0,0" VerticalAlignment="Top" Width="214" Grid.Row="0" Grid.Column="1"/>
-        <Image x:Name="resultImage" Grid.Row="1" Grid.Column="0" Height="300" Width="400" HorizontalAlignment="Center" Margin="-100,9.6,0,-9.6" />
+        <Image x:Name="resultImage" Grid.Column="0" Grid.ColumnSpan="2" Height="300" Margin="100,270,100,0.4" Grid.RowSpan="2" />
         <Button x:Name="load1" Grid.Column="0" Content="Load" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" Click="load1_click"/>
         <Button x:Name="load2" Grid.Column="1" Content="Load" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" Click="load2_click"/>
         <Button x:Name="features" Content="Features" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="features_click"/>
         <Button x:Name="keyPoints" Content="Key Points" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="10,34,0,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="keyPoints_click"/>
-        <TextBox x:Name="neighbours" Grid.Row="0" Grid.Column="2" Height="20" Width="20" HorizontalAlignment="Center" Margin="24,61,69.6,189.4" IsEnabled="False" Text="N" />
-        <TextBox x:Name="threshold" Grid.Row="0" Grid.Column="2" Height="20" Width="20" HorizontalAlignment="Center" Margin="79,61,14.6,189.4" IsEnabled="False" Text="T" />
-        <Button x:Name="neighbour" Content="Neighbourhood" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="10,86,9.6,0" VerticalAlignment="Top" Width="94" IsEnabled="False" Click="neighbourhood_click"/>
+        <TextBox x:Name="neighbours" Grid.Row="0" Grid.Column="2" Width="26" HorizontalAlignment="Center" Margin="22,61,65.6,182.4" IsEnabled="False" Text="N" />
+        <TextBox x:Name="threshold" Grid.Row="0" Grid.Column="2" Width="22" HorizontalAlignment="Center" Margin="77,61,14.6,182.4" IsEnabled="False" Text="T" />
+        <Button x:Name="neighbour" Content="Neighbourhood" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="10,100,9.6,0" VerticalAlignment="Top" Width="94" IsEnabled="False" Click="neighbourhood_click"/>
 
     </Grid>
 </Window>
