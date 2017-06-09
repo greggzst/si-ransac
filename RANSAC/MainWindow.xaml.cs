@@ -51,15 +51,15 @@ namespace RANSAC
 
         private void load1_click(object sender, RoutedEventArgs e)
         {
-            image1.Source = loadImage(firstImage,firstBitmap,firstOriginal);
+            image1.Source = loadImage(out firstImage, out firstBitmap,out firstOriginal);
         }
 
         private void load2_click(object sender, RoutedEventArgs e)
         {
-            image2.Source = loadImage(secondImage,secondBitmap,secondOriginal);
+            image2.Source = loadImage(out secondImage,out secondBitmap,out secondOriginal);
         }
 
-        private ImageSource loadImage(BitmapImage image, Bitmap bitmap, Bitmap bitmapOriginal)
+        private ImageSource loadImage(out BitmapImage image, out Bitmap bitmap, out Bitmap bitmapOriginal)
         {
             OpenFileDialog op = new OpenFileDialog
             {
@@ -75,7 +75,39 @@ namespace RANSAC
                return image;
             }
 
+            image = null;
+            bitmap = null;
+            bitmapOriginal = null;
             return null;
+        }
+
+        private void drawFeaturesOnBitmap(ImageFeature<float>[] features, Bitmap bitmap)
+        {
+            foreach (ImageFeature<float> element in features)
+            {
+                var pointX = element.KeyPoint.Point.X;
+                var pointY = element.KeyPoint.Point.Y;
+
+                Utilities.Drawing.drawPointOnBitmap(bitmap, (int)pointX, (int)pointY);
+            }
+        }
+
+        private void features_click(object sender, RoutedEventArgs e)
+        {
+            if(firstImage != null)
+            {
+                features1 = getImageFeatures(firstBitmap);
+                drawFeaturesOnBitmap(features1, firstBitmap);
+            }
+
+            if (secondImage != null)
+            {
+                features2 = getImageFeatures(secondBitmap);
+                drawFeaturesOnBitmap(features2, secondBitmap);
+            }
+
+            Bitmap result = Utilities.Drawing.mergeImages(firstBitmap, secondBitmap);
+            resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
         }
     }
 }
