@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RANSAC.Structures
 {
-    class FPoint
+    public class FPoint
     {
         public float X { get; set; }
         public float Y { get; set; }
