@@ -10,6 +10,11 @@ namespace RANSAC.Utilities
 {
     class RANSACPerspective : RANSAC
     {
+        protected override int amountOfPoints()
+        {
+            return 4;
+        }
+
         protected override Matrix<double> evaluate(List<Tuple<FPoint, FPoint>> samplePairs)
         {
             List<Tuple<FPoint, FPoint>> sampleList = samplePairs.ToList();

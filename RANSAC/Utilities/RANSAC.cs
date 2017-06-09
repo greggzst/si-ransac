@@ -10,17 +10,18 @@ namespace RANSAC.Utilities
 {
     public abstract class RANSAC
     {
+        protected abstract int amountOfPoints();
         protected abstract Matrix<double> evaluate(List<Tuple<FPoint, FPoint>> samplePairs);
         protected abstract double evaluateError(Matrix<double> model, FPoint keyPoint1, FPoint keyPoint2);
 
 
-        private List<Tuple<FPoint,FPoint>> getSamples(List<Tuple<FPoint,FPoint>> keyPointsPairs, int amountOfSamples)
+        private List<Tuple<FPoint,FPoint>> getSamples(List<Tuple<FPoint,FPoint>> keyPointsPairs)
         {
             var copy = keyPointsPairs.ToList();
             var result = new List<Tuple<FPoint, FPoint>>();
             Random random = new Random();
 
-            for (int i = 0; i < amountOfSamples; i++)
+            for (int i = 0; i < amountOfPoints(); i++)
             {
                 int index = random.Next(copy.Count);
                 result.Add(copy[index]);
