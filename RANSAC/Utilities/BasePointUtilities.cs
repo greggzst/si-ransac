@@ -14,7 +14,7 @@ namespace RANSAC.Utilities
 {
     class BasePointUtilities
     {
-        public static List<FPoint> getKeyPoints(ImageFeature<float>[] features)
+        private static List<FPoint> getKeyPoints(ImageFeature<float>[] features)
         {
             List<FPoint> keyPointList = new List<FPoint>();
             foreach (var feature in features)
@@ -26,7 +26,7 @@ namespace RANSAC.Utilities
             return keyPointList;
         }
 
-        public static List<Tuple<FPoint, FPoint>> getMutualPointsPairs(List<FPoint> firstKeyPoints, List<FPoint> secondKeyPoints)
+        private static List<Tuple<FPoint, FPoint>> getMutualPointsPairs(List<FPoint> firstKeyPoints, List<FPoint> secondKeyPoints)
         {
             List<Tuple<FPoint, FPoint>> mutualPoints = new List<Tuple<FPoint, FPoint>>();
 
@@ -38,7 +38,7 @@ namespace RANSAC.Utilities
                 for (int i = 0; i < secondKeyPoints.Count; i++)
                 {
                     var p = secondKeyPoints.ElementAt(i);
-                    double dist = point.featuresDistance(secondPoint);
+                    double dist = point.featuresDistance(p);
                     if (dist < distance)
                     {
                         distance = dist;
@@ -71,6 +71,11 @@ namespace RANSAC.Utilities
             }
 
             return p.Equals(givenPoint);
+        }
+
+        public static List<Tuple<FPoint,FPoint>> getKeyPointsPairs(ImageFeature<float>[] feat1, ImageFeature<float>[] feat2)
+        {
+            return getMutualPointsPairs(getKeyPoints(feat1), getKeyPoints(feat2));
         }
 
         public static List<Tuple<FPoint, FPoint>> neighbourFilter(List<Tuple<FPoint, FPoint>> keyPointsPairs, int neighbours, double threshold)

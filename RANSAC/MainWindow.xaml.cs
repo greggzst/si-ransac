@@ -19,6 +19,7 @@ using Emgu.CV.Features2D;
 using System.Drawing;
 using RANSAC.Structures;
 using Microsoft.Win32;
+using RANSAC.Utilities;
 
 namespace RANSAC
 {
@@ -107,6 +108,15 @@ namespace RANSAC
             }
 
             Bitmap result = Utilities.Drawing.mergeImages(firstBitmap, secondBitmap);
+            resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
+            keyPoints.IsEnabled = true;
+        }
+
+        private void keyPoints_click(object sender, RoutedEventArgs e)
+        {
+            var keyPointsPairs = BasePointUtilities.getKeyPointsPairs(features1, features2);
+            Bitmap result = Utilities.Drawing.generateNewImage(firstOriginal, secondOriginal, keyPointsPairs, System.Drawing.Color.Brown);
+
             resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
         }
     }
