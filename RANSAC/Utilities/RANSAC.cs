@@ -48,7 +48,7 @@ namespace RANSAC.Utilities
                 filteredPairs = new List<Tuple<FPoint, FPoint>>();
                 while (model == null)
                 {
-                    samplePairs = getSamples(pairs,3);
+                    samplePairs = getSamples(pairs);
                     model = evaluate(samplePairs);
                 }
                 List<Tuple<FPoint, FPoint>> pairsList = pairs.ToList();
