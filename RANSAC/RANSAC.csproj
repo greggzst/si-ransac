@@ -73,6 +73,7 @@
     <Compile Include="Utilities\Drawing.cs" />
     <Compile Include="Utilities\RANSAC.cs" />
     <Compile Include="Utilities\RANSACAffine.cs" />
+    <Compile Include="Utilities\RANSACPerspective.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
