@@ -26,6 +26,8 @@
         <TextBox x:Name="neighbours" Grid.Row="0" Grid.Column="2" Width="26" HorizontalAlignment="Center" Margin="22,61,65.6,182.4" IsEnabled="False" Text="N" />
         <TextBox x:Name="threshold" Grid.Row="0" Grid.Column="2" Width="22" HorizontalAlignment="Center" Margin="77,61,14.6,182.4" IsEnabled="False" Text="T" />
         <Button x:Name="neighbour" Content="Neighbourhood" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="10,100,9.6,0" VerticalAlignment="Top" Width="94" IsEnabled="False" Click="neighbourhood_click"/>
+        <Button x:Name="affine" Content="Affine" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="10,124,9.6,0" VerticalAlignment="Top" Width="75" IsEnabled="False" Click="affine_click"/>
+        <Button x:Name="perspective" Content="Perspective" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="20,148,19.6,0" VerticalAlignment="Top" Width="74" IsEnabled="False" Click="perspective_click"/>
 
     </Grid>
 </Window>

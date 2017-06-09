@@ -115,6 +115,8 @@ namespace RANSAC
                 neighbour.IsEnabled = true;
                 neighbours.IsEnabled = true;
                 threshold.IsEnabled = true;
+                affine.IsEnabled = true;
+                perspective.IsEnabled = true;
             }
             else
             {
@@ -141,6 +143,26 @@ namespace RANSAC
         private void showMessage(string message)
         {
             MessageBox.Show(message);
+        }
+
+        private void affine_click(object sender, RoutedEventArgs e)
+        {
+            RANSACAffine ransac = new RANSACAffine();
+
+            var keyPointsPairs = BasePointUtilities.getKeyPointsPairs(features1, features2);
+            var reducedKeyPointsPairs = ransac.transform(keyPointsPairs, firstImage.PixelWidth, 5000, 50);
+            Bitmap result = Utilities.Drawing.generateNewImage(firstOriginal, secondOriginal, reducedKeyPointsPairs, System.Drawing.Color.Gold);
+            resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
+        }
+
+        private void perspective_click(object sender, RoutedEventArgs e)
+        {
+            RANSACPerspective ransac = new RANSACPerspective();
+
+            var keyPointsPairs = BasePointUtilities.getKeyPointsPairs(features1, features2);
+            var reducedKeyPointsPairs = ransac.transform(keyPointsPairs, firstImage.PixelWidth, 5000, 50);
+            Bitmap result = Utilities.Drawing.generateNewImage(firstOriginal, secondOriginal, reducedKeyPointsPairs, System.Drawing.Color.Maroon);
+            resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
         }
     }
 }
