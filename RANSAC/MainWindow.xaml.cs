@@ -18,6 +18,7 @@ using Emgu.Util;
 using Emgu.CV.Features2D;
 using System.Drawing;
 using RANSAC.Structures;
+using Microsoft.Win32;
 
 namespace RANSAC
 {
@@ -26,10 +27,42 @@ namespace RANSAC
     /// </summary>
     public partial class MainWindow : Window
     {
+        private BitmapImage firstImage;
+        private ImageFeature<float>[] features1;
+
+        private BitmapImage secondImage;
+        private ImageFeature<float>[] features2;
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        private void load1_click(object sender, RoutedEventArgs e)
+        {
+            image1.Source = loadImage(firstImage);
+        }
+
+        private void load2_click(object sender, RoutedEventArgs e)
+        {
+            image2.Source = loadImage(secondImage);
+        }
+
+        private ImageSource loadImage(BitmapImage image)
+        {
+            OpenFileDialog op = new OpenFileDialog
+            {
+                Filter = "|*.jpg;*.jpeg;*.png|" +
+                         "|*.jpg;*.jpeg|" +
+                         "|*.png"
+            };
+            if (op.ShowDialog() == true)
+            {
+               image = new BitmapImage(new Uri(op.FileName));
+               return image;
+            }
+
+            return null;
+        }
     }
 }

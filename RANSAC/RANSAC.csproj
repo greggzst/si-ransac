@@ -70,6 +70,8 @@
     </ApplicationDefinition>
     <Compile Include="Structures\FPoint.cs" />
     <Compile Include="Utilities\BasePointUtilities.cs" />
+    <Compile Include="Utilities\Drawing.cs" />
+    <Compile Include="Utilities\RANSAC.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -114,6 +116,8 @@
     <Content Include="cvextern.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\WP_20170608_23_22_41_Pro.jpg" />
+    <Resource Include="Images\WP_20170608_23_23_54_Pro.jpg" />
     <Content Include="opencv_contrib2410.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
