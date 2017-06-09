@@ -117,6 +117,8 @@ namespace RANSAC
                 threshold.IsEnabled = true;
                 affine.IsEnabled = true;
                 perspective.IsEnabled = true;
+                iterations.IsEnabled = true;
+                maxError.IsEnabled = true;
             }
             else
             {
@@ -130,6 +132,7 @@ namespace RANSAC
             Bitmap result = Utilities.Drawing.generateNewImage(firstOriginal, secondOriginal, keyPointsPairs, System.Drawing.Color.Brown);
 
             resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
+            resultsBox.Text += "\nAmount of key points: " + keyPointsPairs.Count;
         }
 
         private void neighbourhood_click(object sender, RoutedEventArgs e)
@@ -138,6 +141,7 @@ namespace RANSAC
             var reducedKeyPointsPairs = BasePointUtilities.neighbourFilter(keyPointsPairs, int.Parse(neighbours.Text), double.Parse(threshold.Text));
             Bitmap result = Utilities.Drawing.generateNewImage(firstOriginal, secondOriginal, reducedKeyPointsPairs, System.Drawing.Color.Aqua);
             resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
+            resultsBox.Text += "\nPairs After neighbours reduction with " + neighbours.Text + " and threshold " + threshold.Text + ": " + reducedKeyPointsPairs.Count; 
         }
 
         private void showMessage(string message)
@@ -150,9 +154,10 @@ namespace RANSAC
             RANSACAffine ransac = new RANSACAffine();
 
             var keyPointsPairs = BasePointUtilities.getKeyPointsPairs(features1, features2);
-            var reducedKeyPointsPairs = ransac.transform(keyPointsPairs, firstImage.PixelWidth, 5000, 50);
+            var reducedKeyPointsPairs = ransac.transform(keyPointsPairs, firstImage.PixelWidth, int.Parse(iterations.Text), int.Parse(maxError.Text));
             Bitmap result = Utilities.Drawing.generateNewImage(firstOriginal, secondOriginal, reducedKeyPointsPairs, System.Drawing.Color.Gold);
             resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
+            resultsBox.Text += "\nPairs after affine reduction iterations: " + iterations.Text  + " error: "  + maxError.Text + ": "  + reducedKeyPointsPairs.Count;
         }
 
         private void perspective_click(object sender, RoutedEventArgs e)
@@ -160,9 +165,10 @@ namespace RANSAC
             RANSACPerspective ransac = new RANSACPerspective();
 
             var keyPointsPairs = BasePointUtilities.getKeyPointsPairs(features1, features2);
-            var reducedKeyPointsPairs = ransac.transform(keyPointsPairs, firstImage.PixelWidth, 5000, 50);
+            var reducedKeyPointsPairs = ransac.transform(keyPointsPairs, firstImage.PixelWidth, int.Parse(iterations.Text), int.Parse(maxError.Text));
             Bitmap result = Utilities.Drawing.generateNewImage(firstOriginal, secondOriginal, reducedKeyPointsPairs, System.Drawing.Color.Maroon);
             resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
+            resultsBox.Text += "\nPairs after affine reduction iterations: " + iterations.Text + " error: " + maxError.Text + ": " + reducedKeyPointsPairs.Count;
         }
     }
 }
