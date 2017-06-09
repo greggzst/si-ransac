@@ -19,9 +19,7 @@ namespace RANSAC.Utilities
             List<FPoint> keyPointList = new List<FPoint>();
             foreach (var feature in features)
             {
-                var pointCoordinatesAndFeatures = feature.Descriptor;
-                var pointFeatures = pointCoordinatesAndFeatures.Skip(5).ToArray();
-                keyPointList.Add(new FPoint(pointCoordinatesAndFeatures[0], pointCoordinatesAndFeatures[1], pointFeatures));
+                keyPointList.Add(new FPoint(feature.KeyPoint.Point.X, feature.KeyPoint.Point.Y,feature.Descriptor));
             }
             return keyPointList;
         }
