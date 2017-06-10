@@ -120,6 +120,8 @@
     </Content>
     <Resource Include="Images\WP_20170608_23_22_41_Pro.jpg" />
     <Resource Include="Images\WP_20170608_23_23_54_Pro.jpg" />
+    <Resource Include="Images\WP_20170606_16_10_05_Pro.jpg" />
+    <Resource Include="Images\WP_20170606_16_10_10_Pro.jpg" />
     <Content Include="opencv_contrib2410.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
