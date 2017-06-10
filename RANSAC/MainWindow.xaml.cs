@@ -129,7 +129,7 @@ namespace RANSAC
         private void keyPoints_click(object sender, RoutedEventArgs e)
         {
             var keyPointsPairs = BasePointUtilities.getKeyPointsPairs(features1, features2);
-            Bitmap result = Utilities.Drawing.generateNewImage(firstOriginal, secondOriginal, keyPointsPairs, System.Drawing.Color.Brown);
+            Bitmap result = Utilities.Drawing.generateNewImage(firstOriginal, secondOriginal, keyPointsPairs, System.Drawing.Color.OrangeRed);
 
             resultImage.Source = Utilities.Drawing.imageFromBitmap(result);
             resultsBox.Text += "\nAmount of key points: " + keyPointsPairs.Count;
