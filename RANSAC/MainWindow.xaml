@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <Image x:Name="image1" HorizontalAlignment="Left" Height="301" Margin="10,24,0,0" VerticalAlignment="Top" Width="218" Grid.Row="0" Grid.Column="0"/>
         <Image x:Name="image2" HorizontalAlignment="Left" Height="301" Margin="10,24,0,0" VerticalAlignment="Top" Width="214" Grid.Row="0" Grid.Column="1"/>
-        <Image x:Name="resultImage" Grid.Column="0" Grid.ColumnSpan="2" Height="300" Margin="100,270,100,0.4" Grid.RowSpan="2" />
+        <Image x:Name="resultImage" Grid.Column="0" Grid.ColumnSpan="2" Height="300" Margin="10,270,0,0.4" Grid.RowSpan="2" Stretch="Fill" StretchDirection="DownOnly" />
         <Button x:Name="load1" Grid.Column="0" Content="Load" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" Click="load1_click"/>
         <Button x:Name="load2" Grid.Column="1" Content="Load" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" Click="load2_click"/>
         <Button x:Name="features" Content="Features" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="features_click"/>
