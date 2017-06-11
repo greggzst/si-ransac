@@ -69,6 +69,8 @@ namespace RANSAC.Utilities
         {
             BitmapImage bitmapImage = new BitmapImage();
 
+            bitmap.Save(@"E:\Studia\VI semestr\SI\lab\lab4\result.jpg");
+
             using (MemoryStream memory = new MemoryStream())
             {
                 bitmap.Save(memory, ImageFormat.Png);
@@ -81,6 +83,7 @@ namespace RANSAC.Utilities
 
             return bitmapImage;
         }
+        
 
     }
 }
